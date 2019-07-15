@@ -1,0 +1,55 @@
+Hybris Setup for GP--
+
+1. extract Hybris67_P2
+2. Add custom folder under bin
+3. Do ant clean all
+4. Clone gpcommerce in custom and copy local.prop and localext.xml from gpcommerce/configuration/local to hybris/configuration/local
+5. Add extra memory in project.properties of platform to 4G
+6. open /bin/platform path in cmd and do setantenv.bat or . ./setantenv.sh 
+7. ant initialize from same path
+8. hybrisserver.bat or ./hybrisserver.sh
+
+Above steps will create hybris database and server start
+
+We can access below steps
+username: admin/nimda
+localhost:9002/backoffice  
+localhost:9002/hac
+localhost:9002/gp/?site=b2bwhitelabel
+localhost:9002/?site=b2cwhitelabel
+
+Front end build
+
+1. open custom/gpcommerece/gpfrontend in cmd
+2. do npm install if issues read readme od gpfrontend
+3. set brand=all windows or brand=all mac
+4. brand=all npm run deploy
+
+
+Product setup
+
+1. After server start open backoffice and search for catolog version and do catalog sync for gpusproductcatalog from stage to online 
+2. search for facet and open facet configuration/local
+3. select multibrand index
+4. open products and do index
+Now search for any product in site we can see
+
+
+Subscription cart set up
+
+1. Run the below impex in hac console.
+INSERT_UPDATE GPSubscriptionFrequency;code[unique=true];frequency
+;freq3;Monthly->30
+$productCatalog=gpUSProductCatalog
+$catalogVersion=catalogVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default='$productCatalog:Online']
+ 
+INSERT_UPDATE ContextualAttributeValue;$catalogVersion;product(code,$catalogVersion)[unique=true];context(code);subscriptionfrequency(code);subscribable
+;;56788;B2BWhitelabelContext;freq3;true
+
+2. Open product 56788 in backoffice and open price and open site related price and update PriceRow.percentageDiscount in admin tab to 2 and save
+3. Make sure null price has more price than site price (sale price)
+4. Now if we open pdp page of the product 56788 we can see subscribe button.
+
+
+
+ 

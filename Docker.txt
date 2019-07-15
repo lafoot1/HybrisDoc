@@ -1,0 +1,59 @@
+Signup in docker and Download Docker for windows installer
+Enable Hyper-V feature from features in control panel
+Install Docker for windows installer with default settings
+
+Login to docker after clicking on Desktop shortcut dileepadidam/A@rshika02
+
+Open powershell 
+docker login
+docker pull ubuntu
+docker image ls // this command wi
+
+docker run -it -d -p 9002:9002 -p 9001:9001 -p 8000:8000 -p 8983:8983 4c108a37151f /bin/bash 
+// these above ports are used in hybris which we are opening for docker to use.
+// '4c108a37151f' this should be same as docker image name
+
+docker ps // it will give image name
+
+docker exec -it 4d7b8d6b3ec7 /bin/bash
+
+mkdir gp
+
+ls -all
+
+C:\> docker cp C:\Hybris67 4d7b8d6b3ec7:/gp    //copy local hybris setup to Docker ubuntu image
+
+docker exec -it 4d7b8d6b3ec7 /bin/bash
+cd gp
+cd Hybris67/
+ls
+apt-get update //this is used to use latest ubuntu commands
+
+apt-get install openjdk-8-jdk  //installs open jdk and set JAVA_HOME in ubuntu
+
+IMP: After setup if we start server solr server will throw warnings, so need to do below step before start of server
+
+1. open this file in hybris setup in local C:\Hybris67\hybris\bin\ext-commerce\solrserver\resources\solr\bin\solr 
+2. Search for security risk
+3. May be around line 1687 comment exit1 by adding #exit1
+4. Now copy this file to docker ububtu by using below command
+5. docker cp C:\Hybris67\hybris\bin\ext-commerce\solrserver\resources\solr\bin\solr 4d7b8d6b3ec7:/gp/Hybris67/hybris\bin\ext-commerce\solrserver\resources\solr\bin\
+
+
+
+
+To start server from docker image first go to ubuntu path
+
+docker exec -it 4d7b8d6b3ec7 /bin/bash
+cd gp/Hybris67/hybris/bin/platform/
+. ./setantenv.sh
+ant all && ./hybrisstart.sh debug
+
+
+Always push latest code changes to docker ubuntu and then do ant all and server start
+
+
+
+
+
+
