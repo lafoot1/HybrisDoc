@@ -1,0 +1,3 @@
+OpenText Media Management Connector for Hybris SAP_DAM_HYBRIS 16.4.0 (Revision 16.4.0.346)
+OpenText Media Management Smartedit for Hybris 6.4-6.5 16.4.0 (Revision 16.4.0.86)
+OpenText Media Management Smartedit for Hybris 6.6 16.4.0 (Revision 16.4.0.9)

@@ -1,0 +1,49 @@
+Applying Patch 001 to DAMLink hybris version 16.4.0
+
+1. Shut down the hybris server.
+
+2. Move the existing DAMLink Hybris Extensions* folders  from the install folder (<hybris suite install directory>/hybris/bin/custom) to a folder of your choice outside of the install folder.
+In this way, the existing installation folder is removed and the configuration settings are saved. Some configuration details, especially settings in the project.properties file, can be reused after installation of the new DAMLink hybris extension from the patch.
+
+3. Reinstall the DAMLink Hybris Extensions*
+Unzip the damlink-hybris-integration-16.4.0.zip file into the Hybris Suite installation directory.
+The path in the zip file starts with the Hybris sub directory below the Suite installation directory.
+
+Note: For Hybris 6.4, 6.5 and 6.6 there are different version of the otmmsmartedit extension.
+
+To use the otmmsmartedit extension together with Hybris 6.4 or 6.5:
+a. After unzipping damlink-hybris-integration-16.4.0.zip, delete the <hybris suite installation directory>/hybris/bin/custom/otmmsmartedit directory.
+b. Unzip the damlink-smartedit-hybris6465-16.4.0.zip file into the Hybris Suite installation directory.
+   The path in the zip file starts with the hybris sub directory below the Suite installation directory.
+   
+To use the otmmsmartedit extension together with Hybris 6.6:
+a. After unzipping damlink-hybris-integration-16.4.0.zip, delete the <hybris suite installation directory>/hybris/bin/custom/otmmsmartedit directory.
+b. Unzip the damlink-smartedit-hybris66-16.4.0.zip file into the Hybris Suite installation directory.
+   The path in the zip file starts with the hybris sub directory below the Suite installation directory.   
+
+
+4. Adjust project.properties
+
+If there have been any custom specific changes in the project.properties file of the previous otmmaddon extension, integrate these changes from the previous project.properties file into the new one.
+
+Note: Normally the project.properties should not be changed. The settings can be overwritten and adjusted to the customer's need in the local.properties file of the hybris deployment.
+
+5. In case of SSO the "security-sso.jar", which contains the security digest, has to be copied back to "otmmaddon/lib".
+
+6. If there was a Hook implemented as a jar file that was deployed into the otmmaddon/lib folder, re-deploy the jar file: 
+Copy it from the previous otmmaddon that has been moved previously and paste it to the lib folder of the new otmmaddon deployment (<hybris suite install directory>/hybris/bin/custom/otmmaddon/lib).
+
+7. If you are using productcockpit and/or WCMS Cockpit
+If there have been any custom specific changes in your editor configurations (see otmmaddonui/resources/otmmaddonui/productcockpit/xml and otmmaddonui/resources/otmmaddonui/cmscockpit/xml), integrate these changes from the previous editor configuration files into the new one. Reimport "productcockpit_config.impex" in order to make the changes effective.
+
+8. If you are using Backoffice / Cockpit NG
+
+If there have been any custom specific changes at "otmmaddonbackoffice-backoffice-config.xml", integrate these changes from the previous "otmmaddonbackoffice-backoffice-config.xml" into the new one.
+
+In order to make the changes effective you can either
+- Restart your Hybris Server
+- Or reset cockpit-config.xml at Application Orchestrator
+
+9. Build the new extensions and start the hybris server.
+
+*otmmaddon, otmmaddonui and otmmaddonbackoffice, also otmmws and otmmsmartedit if installed
