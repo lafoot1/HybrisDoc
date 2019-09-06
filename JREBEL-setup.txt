@@ -1,0 +1,13 @@
+1. Install Jrebel plugin in eclipse
+2. Click on Activate License add activation Group URL and deloitte emailid
+	Your activation Group URL is: http://ztalicenseserver.deloitteresources.com/29038ce7-3a29-488f-bff7-408f0426359b 
+3. Add required projects for Jrebel
+4. Allocate Jrebel for 14 days which happens only in deloittenet
+5. Add following properties in local.properties
+	tomcat.javaoptions=-agentpath:"%JREBEL_HOME%/lib/jrebel64.dll"
+    tomcat.debugjavaoptions=-agentpath:"%JREBEL_HOME%/lib/jrebel64.dll" -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n
+6. Add JREBEL_HOME in environment variables C:\Users\dadidam\Downloads\eclipse-jee-oxygen-3a-win32-x86_64\eclipse\plugins\org.zeroturnaround.eclipse.embedder_2018.1.2.RELEASE\jrebel
+	(installed jrebel will be in eclipse plugins)
+7. Run ant
+8. Start Hybris server and check for the JREBEL in server startup
+9. Run ant build at the extensions path where you have done changes
